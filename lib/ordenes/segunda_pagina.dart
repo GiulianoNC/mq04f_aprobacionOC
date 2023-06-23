@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:mq04f/parseo/global.dart' as global;
 
 import 'package:flutter/material.dart';
 
@@ -28,8 +29,8 @@ class _AprobacionState extends State<Aprobacion> {
   Future<List <Rowset>?> _getListado() async {
     var url = Uri.parse(baseUrl + api);
     var _payload = json.encode({
-      "username": "sbasilico",
-      "passwotd": "silvio71",
+      "username": global.user,
+      "passwotd": global.user,
       "ORDEN_NRO":ordenGlobal,
       "ORDEN_TIPO": tipoGlobal,
       "ORDEN_CIA": ciaGlobal
@@ -72,8 +73,8 @@ class _AprobacionState extends State<Aprobacion> {
   Future<List <Aprobado>?> _getAprobado() async{
     var url = Uri.parse(baseUrl + api2);
     var _payload = json.encode({
-      "username": "sbasilico",
-      "passwotd": "silvio71",
+      "username": global.user,
+      "passwotd": global.pass,
       "ORDEN_NRO":ordenGlobal,
       "ORDEN_TIPO": tipoGlobal,
       "ORDEN_CIA": ciaGlobal
@@ -160,6 +161,7 @@ class _AprobacionState extends State<Aprobacion> {
     // para recibir datos de la pantalla anterior opcion 2
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Lista de ordenes",
       home: Scaffold(
         appBar: AppBar(

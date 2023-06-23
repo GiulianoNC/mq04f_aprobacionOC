@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:mq04f/parseo/global.dart' as global;
 
 import '../herramientas/variables_globales.dart';
 import '../parseo/body.dart';
 
-const String baseUrl  = "http://qcsys.servehttp.com:925/";
+ String baseUrl  = global.direc;
 
 class Primera extends StatefulWidget {
   const Primera({Key? key}) : super(key: key);
@@ -24,8 +25,8 @@ class _PrimeraState extends State<Primera> {
   Future<List <Mq0401PFormreq1>?> _getListado() async {
     var url = Uri.parse(baseUrl + api);
     var _payload = json.encode({
-      "username": "sbasilico",
-      "passwotd": "silvio71"
+      "username": global.user,
+      "passwotd": global.pass
     });
     var _headers = {
       "Authorization" : autorizacionGlobal,
@@ -78,9 +79,10 @@ class _PrimeraState extends State<Primera> {
     // para recibir datos de la pantalla anterior opcion 2
     Map? parametros = ModalRoute.of(context)?.settings.arguments as Map?;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
-            title: Text("numero"),
+            title: Text("Ordenes"),
             backgroundColor :Colors.purple,
           ),
           body: FutureBuilder(

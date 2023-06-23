@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'global.dart' as global;
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,12 +16,16 @@ class LoginScreen extends StatefulWidget {
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
+
+
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isChecked = false;
   String login = '';
   String password = '';
+  String direccion = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +52,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
+                    hintText: 'url',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  onChanged: (value) {
+                    direccion = value;
+                    global.direc = value;
+                  },
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 20.0),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
                     hintText: 'login',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
@@ -58,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onChanged: (value) {
                     login = value;
+                    global.user = value;
                   },
                 ),
               ),
@@ -83,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onChanged: (value) {
                     password = value;
+                    global.pass = value;
                   },
                 ),
               ),
@@ -114,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () async {
 
                     //yo
-                    var baseUrl = "http://quantumconsulting.servehttp.com:925";
+                    var baseUrl = direccion;
                     late String api = "/jderest/v3/orchestrator/MQ0401P_ORCH";
                     //   Future<dynamic> post(String api, dynamic object) async {
                     var url = Uri.parse(baseUrl + api);
